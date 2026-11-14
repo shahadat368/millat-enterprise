@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07539a"><title>মিল্লাত এন্টারপ্রাইজ</title>
+<style>
+:root{--navy:#07539a;--navy2:#063d72;--green:#078b4b;--red:#d52c43;--ink:#14263d;--muted:#62748a;--line:#dce5ef;--bg:#f3f7fc}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:system-ui,"Noto Sans Bengali",sans-serif;color:var(--ink)}
+header{background:linear-gradient(115deg,var(--navy2),#0870b9);color:white;padding:14px 18px;box-shadow:0 3px 14px #003b7028}
+.top{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:12px}.logo{font-size:34px}.brand h1{font-size:clamp(18px,3vw,27px);margin:0;font-weight:850}.brand p{margin:2px 0 0;font-size:13px;opacity:.9}.date{font-weight:700;white-space:nowrap}
+main{max-width:1180px;margin:18px auto 90px;padding:0 14px}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px}
+button{font:inherit;border:0;border-radius:10px;padding:10px 14px;font-weight:750;cursor:pointer}.primary{background:var(--green);color:white}.blue{background:var(--navy);color:white}.light{background:#e7f0fa;color:var(--navy)}.redbtn{background:#ffeaed;color:var(--red)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.balance{padding:15px;border-radius:16px;display:flex;align-items:center;gap:12px;min-height:94px;border:1px solid #d8e3ee}.balance .ico{font-size:34px}.balance small{display:block;font-weight:750;color:#23415e}.balance strong{display:block;font-size:clamp(18px,2.5vw,25px);margin-top:3px}.cash{background:linear-gradient(120deg,#d9f5e5,#c4ead7)}.bkash{background:linear-gradient(120deg,#ffe0ef,#f7c8e2)}.bank{background:linear-gradient(120deg,#d9edff,#c5e3fa)}.stock{background:linear-gradient(120deg,#eee2ff,#dfcefa)}
+.summary{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:10px;margin-top:13px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px}.summary div{padding:3px 10px;border-right:1px solid var(--line)}.summary div:last-child{border:0}.summary small{font-weight:750}.summary strong{display:block;font-size:23px;margin-top:3px}.green{color:var(--green)}.red{color:var(--red)}
+
+.customer-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.customer-stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 15px}.customer-stat small{display:block;color:var(--muted);font-weight:750}.customer-stat strong{display:block;font-size:clamp(17px,2.3vw,23px);margin-top:5px}.customer-stat .sub{font-size:11px;color:var(--muted);margin-top:3px}
+@media(max-width:760px){.customer-summary{grid-template-columns:1fr 1fr}.customer-stat:last-child{grid-column:1/-1}}
+.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:15px;margin-top:15px;box-shadow:0 3px 12px #17395a08}.paneltitle{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}.paneltitle h2{margin:0;font-size:19px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-weight:750;font-size:14px;margin:0 0 5px}.field input,.field select,.field textarea,.search{width:100%;border:1px solid #cbd7e3;border-radius:10px;padding:11px;font:inherit;background:#fff;color:var(--ink)}.field textarea{min-height:65px}.typegrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:12px}.typebtn{min-height:78px;border:1px solid #dce4ef;border-radius:14px;padding:8px 5px;background:#f8fbff;color:#162c46;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}.typebtn .ico{font-size:25px}.typebtn.active{outline:3px solid #0a69b733;border-color:#0a69b7;background:#e9f4ff}.typebtn span:last-child{font-size:12px;color:#5c6d80}.savewide{width:100%;margin-top:12px;background:linear-gradient(90deg,#078b4b,#08a85c);color:white;font-size:17px}
+.sectiontabs{display:flex;gap:7px;overflow:auto;margin:15px 0}.tab{white-space:nowrap;background:#e7eef7;color:#23415e}.tab.active{background:var(--navy);color:white}
+.filters{display:flex;gap:9px;flex-wrap:wrap}.filters input{flex:1;min-width:180px}.filters select{min-width:170px;border:1px solid #cbd7e3;border-radius:10px;padding:10px;font:inherit}
+.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:680px}th,td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line);font-size:14px}th{color:var(--muted);font-size:13px}td strong{display:block}.muted{color:var(--muted);font-size:12px}.pill{display:inline-block;padding:4px 8px;border-radius:30px;background:#e8f1fb;color:#145b98;font-size:12px}.action{padding:6px 9px;margin-right:3px;background:#edf4fb;color:#07539a}.empty{text-align:center;padding:24px;color:var(--muted)}
+.view{display:none}.view.active{display:block}.quicklinks{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.quick{background:white;border:1px solid var(--line);border-radius:13px;padding:14px 8px;text-align:center;font-weight:750}.quick b{display:block;font-size:25px}
+.reportcards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.reportcards .balance{display:block}.chart{display:flex;align-items:end;gap:14px;height:210px;padding:15px 8px 25px;border-bottom:1px solid var(--line)}.barpair{flex:1;display:flex;align-items:end;justify-content:center;gap:5px;height:100%;position:relative}.bar{width:30%;max-width:36px;border-radius:6px 6px 0 0;background:#17a65b}.bar.exp{background:#e54858}.barlabel{position:absolute;bottom:-24px;font-size:12px;color:var(--muted)}
+.bottomnav{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:5}.navinner{width:min(900px,100%);display:grid;grid-template-columns:repeat(5,1fr)}.navbtn{background:transparent;border-radius:0;color:#42536a;padding:9px 3px;font-size:12px}.navbtn b{display:block;font-size:21px}.navbtn.active{color:var(--navy);background:#e8f2fc}
+dialog{border:0;border-radius:17px;padding:0;width:min(520px,calc(100% - 24px));box-shadow:0 18px 60px #0005}dialog::backdrop{background:#071a2eb3}.modal{padding:20px}.modal h2{margin:0 0 14px}.modalactions{display:flex;justify-content:flex-end;gap:8px;margin-top:15px}.hint{font-size:12px;color:var(--muted);line-height:1.6;margin-top:12px}
+@media(max-width:760px){.cards{grid-template-columns:repeat(2,1fr)}.typegrid{grid-template-columns:repeat(2,1fr)}.summary{grid-template-columns:1fr 1fr}.summary div:first-child{grid-column:1/-1;border-right:0;border-bottom:1px solid var(--line);padding-bottom:10px}.summary div:nth-child(2){border-right:1px solid var(--line)}.quicklinks{grid-template-columns:repeat(2,1fr)}.date{font-size:12px}.formgrid{grid-template-columns:1fr}.reportcards{grid-template-columns:1fr}}
+@media(max-width:390px){.balance{padding:10px;gap:7px}.balance .ico{font-size:26px}.balance strong{font-size:17px}.brand p{font-size:11px}.logo{font-size:28px}}
+body:not(.authed) header,body:not(.authed) main,body:not(.authed) .bottomnav{display:none!important}
+</style></head>
+<body>
+
+<div id="authPanel" style="max-width:520px;margin:18px auto;padding:18px;background:white;border:1px solid #dce5ef;border-radius:16px">
+ <h2 style="margin-top:0">🔐 মিল্লাত এন্টারপ্রাইজ লগইন</h2>
+ <p style="font-size:14px;color:#62748a">আপনার অনুমোদিত Firebase ইমেইল ও পাসওয়ার্ড দিয়ে প্রবেশ করুন।</p>
+ <label style="display:block;margin:10px 0 4px;font-weight:700">ইমেইল</label>
+ <input id="loginEmail" type="email" autocomplete="username" style="width:100%;padding:11px;border:1px solid #cbd7e3;border-radius:9px">
+ <label style="display:block;margin:10px 0 4px;font-weight:700">পাসওয়ার্ড</label>
+ <input id="loginPassword" type="password" autocomplete="current-password" style="width:100%;padding:11px;border:1px solid #cbd7e3;border-radius:9px">
+ <button id="loginBtn" style="margin-top:12px;background:#07539a;color:white;width:100%">লগইন করুন</button>
+ <p id="authStatus" style="font-size:13px;color:#62748a;margin-bottom:0">লগইন না করা পর্যন্ত হিসাবের ডেটা লোড হবে না।</p>
+</div>
+
+<header><div class="top"><div class="brand"><div class="logo">🏪</div><div><h1>মিল্লাত এন্টারপ্রাইজ</h1><p>প্রোঃ সাহাদাৎ হোসাইন</p></div></div><div class="date" id="today"></div></div></header>
+<main>
+<div class="toolbar"><button class="primary" onclick="showView('home');document.getElementById('entry').scrollIntoView({behavior:'smooth'})">＋ নতুন লেনদেন</button><button class="light" onclick="openOpening()">শুরুর ব্যালেন্স</button><button class="light" onclick="backup()">হিসাব ব্যাকআপ</button><button class="light" onclick="millatLogout()">লগআউট</button></div>
+<section id="home" class="view active">
+<div class="cards" id="balances"></div>
+<div class="summary"><div><small>মোট সম্পদ (সব ব্যালেন্স)</small><strong id="assets">৳ ০</strong></div><div><small class="green">মোট আয়</small><strong class="green" id="income">৳ ০</strong></div><div><small class="red">মোট ব্যয়</small><strong class="red" id="expense">৳ ০</strong></div></div>
+<div class="customer-summary" id="customerSummary"></div>
+<div class="paneltitle" style="margin-top:14px"><h3>কাস্টমারের জমা টাকা</h3><span class="pill">জমা ও ফেরতের হিসাব</span></div>
+<div class="customer-summary" id="depositSummary"></div>
+<section class="panel" id="entry"><div class="paneltitle"><h2>➕ নতুন লেনদেন যোগ করুন</h2><span class="pill">লেনদেনের তথ্য</span></div>
+<div class="formgrid"><div class="field"><label>কাস্টমারের নাম</label><input id="customer" placeholder="নাম লিখুন"></div><div class="field"><label>লেনদেনের ধরন</label><select id="kind"></select></div><div class="field"><label>টাকার পরিমাণ (৳)</label><input id="amount" type="number" min=".01" step=".01" placeholder="টাকা লিখুন"></div><div class="field"><label>লেনদেনের কারণ / বিবরণ</label><input id="reason" placeholder="যেমন: বিকাশে টাকা নেওয়া"></div></div>
+<div class="typegrid" id="typegrid"></div><button class="savewide" onclick="saveTxn()">▣　লেনদেন সংরক্ষণ করুন</button></section>
+<div class="hint">লেনদেনের সম্পাদনা (✎) ও মুছে ফেলার (🗑) অপশন আগের মতোই “সকল লেনদেন” তালিকায় থাকবে।</div>
+<div class="quicklinks"><div class="quick" onclick="showView('customers')"><b>👥</b>কাস্টমার হিসাব</div><div class="quick" onclick="showView('transactions')"><b>📋</b>সকল লেনদেন</div><div class="quick" onclick="showView('reports')"><b>📊</b>রিপোর্ট</div><div class="quick" onclick="backup()"><b>📄</b>ব্যাকআপ</div></div>
+<section class="panel"><div class="paneltitle"><h2>সাম্প্রতিক লেনদেন</h2><button class="light" onclick="showView('transactions')">সব দেখুন ›</button></div><div id="recent"></div></section>
+</section>
+<section id="transactions" class="view panel"><div class="paneltitle"><h2>সকল লেনদেন</h2><span class="pill" id="totalCount"></span></div><div class="filters"><input class="search" id="txSearch" placeholder="নাম / কারণ খুঁজুন"><select id="txFilter"><option value="">সব হিসাব</option></select></div><div id="allTx"></div></section>
+<section id="customers" class="view panel"><div class="paneltitle"><h2>কাস্টমার হিসাব</h2><span class="pill">নাম অনুযায়ী সারাংশ</span></div><input class="search" id="custSearch" placeholder="কাস্টমারের নাম খুঁজুন"><div id="custList"></div></section>
+<section id="reports" class="view"><div class="panel"><div class="paneltitle"><h2>লাভ-লোকসান ড্যাশবোর্ড</h2><span class="pill">সব লেনদেনের সারাংশ</span></div><div class="reportcards" id="reportCards"></div><h3>আয় ও ব্যয়ের তুলনা</h3><div class="chart" id="chart"></div><div class="hint">এখানে আয় ও ব্যয় হিসেবে “আয়” এবং “ব্যয়” ধরনের লেনদেন গণনা করা হয়। কাস্টমারকে বাকি দিলে ক্যাশ কমবে এবং কাস্টমারের পাওনা বাড়বে; বাকি আদায় করলে ক্যাশ বাড়বে এবং পাওনা কমবে।</div></div></section>
+<section id="settings" class="view panel"><h2>সেটিংস ও ব্যাকআপ</h2><p>আপনার দোকানের নাম: <b>মিল্লাত এন্টারপ্রাইজ</b></p><button class="primary" onclick="backup()">হিসাব ডাউনলোড করুন</button> <button class="light" onclick="document.getElementById('restoreFile').click()">ব্যাকআপ ফিরিয়ে আনুন</button><input id="restoreFile" type="file" accept="application/json" hidden><p class="hint">গুরুত্বপূর্ণ: এই নমুনায় তথ্য এই ব্রাউজারের ডিভাইসেই থাকে। ব্রাউজারের ডেটা মুছে গেলে হিসাব হারাতে পারেন। নিয়মিত ব্যাকআপ নিন। একাধিক ডিভাইসে একই তথ্য দেখতে অনলাইন ডেটাবেজ, লগইন ও হোস্টিং যোগ করতে হবে।</p><button class="redbtn" onclick="clearAll()">সব হিসাব মুছে ফেলুন</button></section>
+</main>
+<nav class="bottomnav"><div class="navinner"><button class="navbtn active" data-view="home" onclick="showView('home')"><b>⌂</b>হোম</button><button class="navbtn" data-view="transactions" onclick="showView('transactions')"><b>☷</b>লেনদেন</button><button class="navbtn" data-view="reports" onclick="showView('reports')"><b>▥</b>রিপোর্ট</button><button class="navbtn" data-view="customers" onclick="showView('customers')"><b>♙</b>কাস্টমার</button><button class="navbtn" data-view="settings" onclick="showView('settings')"><b>⚙</b>সেটিংস</button></div></nav>
+<dialog id="opening"><form class="modal" method="dialog" onsubmit="saveOpening(event)"><h2>শুরুর ব্যালেন্স সেট করুন</h2><div class="formgrid"><div class="field"><label>ক্যাশ</label><input id="oCash" type="number" step=".01"></div><div class="field"><label>বিকাশ</label><input id="oBkash" type="number" step=".01"></div><div class="field"><label>নগদ</label><input id="oNagad" type="number" step=".01"></div><div class="field"><label>ক্রেডিট কার্ড</label><input id="oCredit" type="number" step=".01"></div><div class="field"><label>ব্যাংক</label><input id="oBank" type="number" step=".01"></div><div class="field"><label>রিচার্জ / মিনিট কার্ড</label><input id="oStock" type="number" step=".01"></div></div><div class="modalactions"><button type="button" class="light" onclick="opening.close()">বাতিল</button><button class="primary">সংরক্ষণ</button></div></form></dialog>
+<dialog id="editdlg"><form class="modal" method="dialog" onsubmit="updateTxn(event)"><h2>লেনদেন সম্পাদনা</h2><input id="editIndex" type="hidden"><div class="formgrid"><div class="field"><label>লেনদেনের ধরন</label><select id="eKind"></select></div><div class="field"><label>টাকা</label><input id="eAmount" type="number" step=".01" min=".01"></div><div class="field"><label>কাস্টমার</label><input id="eCustomer"></div><div class="field"><label>তারিখ</label><input id="eDate" type="date"></div><div class="field" style="grid-column:1/-1"><label>কারণ</label><input id="eReason"></div></div><div class="modalactions"><button type="button" class="light" onclick="editdlg.close()">বাতিল</button><button class="primary">আপডেট</button></div></form></dialog>
+<script>
+const TYPES=['বিকাশ রিসিভ','বিকাশ সেন্ড মানি','ক্যাশ নেওয়া','ক্যাশ দেওয়া','ব্যাংক থেকে টাকা বের করা','বিকাশ থেকে ব্যাংকে পাঠানো','রিচার্জ / মিনিট কার্ড','আয়','ব্যয়','কাস্টমারকে বাকি দিলাম','কাস্টমারের বাকি আদায়','নগদ রিসিভ','নগদ সেন্ড মানি','বিকাশ থেকে ক্রেডিট কার্ডে পাঠানো','ক্রেডিট কার্ড থেকে টাকা বের করা','কাস্টমারের টাকা জমা (ক্যাশে)','কাস্টমারের টাকা জমা (বিকাশে)','কাস্টমারের জমা টাকা ফেরত (ক্যাশে)','কাস্টমারের জমা টাকা ফেরত (বিকাশে)'];
+const ICONS=['💸','➦','💵','🤲','🏦','⇄','📱','⬆️','⬇️','🧾','💰','🟠','➦','💳','💳','💰','💠','↩️','↩️'];
+let db=JSON.parse(localStorage.getItem('millat_web_v2')||'null')||{opening:{cash:0,bkash:0,bank:0,stock:0,nagad:0,credit:0},tx:[]};
+db.opening={cash:0,bkash:0,bank:0,stock:0,nagad:0,credit:0,...(db.opening||{})};
+const el=id=>document.getElementById(id);
+function persist(){localStorage.setItem('millat_web_v2',JSON.stringify(db));render();if(window.queueMillatCloudSave)window.queueMillatCloudSave()}
+function fmt(n){return '৳ '+Number(n||0).toLocaleString('bn-BD',{maximumFractionDigits:2})}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function calc(){let b={...db.opening},inc=0,exp=0;db.tx.forEach(t=>{let a=+t.amount;switch(t.kind){case TYPES[0]:b.cash-=a;b.bkash+=a;break;case TYPES[1]:case TYPES[2]:b.cash+=a;b.bkash-=a;break;case TYPES[3]:b.cash-=a;b.bkash+=a;break;case TYPES[4]:b.cash+=a;b.bank-=a;break;case TYPES[5]:b.bkash-=a;b.bank+=a;break;case TYPES[6]:b.cash+=a;b.stock-=a;break;case TYPES[7]:b.cash+=a;inc+=a;break;case TYPES[8]:b.cash-=a;exp+=a;break;case TYPES[9]:b.cash-=a;break;case TYPES[10]:b.cash+=a;break;case TYPES[11]:b.cash-=a;b.nagad+=a;break;case TYPES[12]:b.nagad-=a;b.cash+=a;break;case TYPES[13]:b.bkash-=a;b.credit+=a;break;case TYPES[14]:b.credit-=a;b.cash+=a;break;case TYPES[15]:b.cash+=a;break;case TYPES[16]:b.bkash+=a;break;case TYPES[17]:b.cash-=a;break;case TYPES[18]:b.bkash-=a;break;}});return {b,inc,exp}}
+function typeOptions(){return TYPES.map((t,i)=>`<option value="${t}">${t}</option>`).join('')}
+el('kind').innerHTML=typeOptions();el('eKind').innerHTML=typeOptions();el('txFilter').innerHTML+='<option>'+TYPES.join('</option><option>')+'</option>';
+el('typegrid').innerHTML=TYPES.map((t,i)=>`<button type="button" class="typebtn" data-kind="${t}" onclick="chooseType('${t}')"><span class="ico">${ICONS[i]}</span><b>${t}</b><span>${i===0?'ক্যাশ −, বিকাশ +':i===1?'ক্যাশ +, বিকাশ −':i===4?'ক্যাশ +, ব্যাংক −':i===5?'বিকাশ −, ব্যাংক +':i===7?'ক্যাশ +':i===8?'ক্যাশ −':i===9?'ক্যাশ −, পাওনা +':i===10?'ক্যাশ +, পাওনা −':i===11?'ক্যাশ −, নগদ +':i===12?'নগদ −, ক্যাশ +':i===13?'বিকাশ −, কার্ড +':i===14?'কার্ড −, ক্যাশ +':i===15?'ক্যাশ +, জমা +':i===16?'বিকাশ +, জমা +':i===17?'ক্যাশ −, ফেরত':i===18?'বিকাশ −, ফেরত':'লেনদেন'}</span></button>`).join('');
+function chooseType(t){el('kind').value=t;document.querySelectorAll('.typebtn').forEach(x=>x.classList.toggle('active',x.dataset.kind===t))}
+function saveTxn(){let a=Number(el('amount').value),cust=el('customer').value.trim(),kind=el('kind').value;if(!kind){alert('আগে লেনদেনের ধরন নির্বাচন করুন');return}if(!a||a<=0){alert('সঠিক টাকার পরিমাণ লিখুন');return}if([TYPES[9],TYPES[10],TYPES[15],TYPES[16],TYPES[17],TYPES[18]].includes(kind)&&!cust){alert('কাস্টমারের হিসাবের জন্য নাম লিখুন');return}if(kind===TYPES[10]){let due=customerDue(cust);if(a>due){alert('এই কাস্টমারের মোট বাকি '+fmt(due)+'। এর বেশি টাকা জমা দেওয়া যাবে না।');return}}if([TYPES[17],TYPES[18]].includes(kind)){let held=customerDepositDue(cust);if(a>held){alert('এই কাস্টমারের জমা আছে '+fmt(held)+'। এর বেশি ফেরত দেওয়া যাবে না।');return}}db.tx.push({kind,amount:a,customer:cust,reason:el('reason').value.trim(),date:new Date().toISOString().slice(0,10),time:new Date().toLocaleTimeString('bn-BD',{hour:'2-digit',minute:'2-digit'})});el('customer').value='';el('amount').value='';el('reason').value='';persist();alert('লেনদেন সংরক্ষণ হয়েছে')}
+function txRows(list){if(!list.length)return '<div class="empty">কোনো লেনদেন পাওয়া যায়নি</div>';return '<div class="tablewrap"><table><thead><tr><th>তারিখ</th><th>লেনদেন / কাস্টমার</th><th>কারণ</th><th>টাকা</th><th>কাজ</th></tr></thead><tbody>'+list.map(x=>`<tr><td>${esc(x.t.date)}<div class="muted">${esc(x.t.time||'')}</div></td><td><strong>${esc(x.t.kind)}</strong><span class="muted">${esc(x.t.customer||'নাম নেই')}</span></td><td>${esc(x.t.reason||'—')}</td><td><strong>${fmt(x.t.amount)}</strong></td><td><button class="action" onclick="editTx(${x.i})">✎</button><button class="action" onclick="delTx(${x.i})">🗑</button></td></tr>`).join('')+'</tbody></table></div>'}
+function render(){let {b,inc,exp}=calc();let cards=[['💵','ক্যাশ ব্যালেন্স',b.cash,'cash'],['💠','বিকাশ ব্যালেন্স',b.bkash,'bkash'],['🟠','নগদ ব্যালেন্স',b.nagad,'bank'],['💳','ক্রেডিট কার্ড ব্যালেন্স',b.credit,'stock'],['🏦','ব্যাংক ব্যালেন্স',b.bank,'bank'],['📱','রিচার্জ ও মিনিট কার্ড',b.stock,'stock']];el('balances').innerHTML=cards.map(c=>`<div class="balance ${c[3]}"><span class="ico">${c[0]}</span><div><small>${c[1]}</small><strong>${fmt(c[2])}</strong></div></div>`).join('');el('assets').textContent=fmt(b.cash+b.bkash+b.bank+b.stock+b.nagad+b.credit);el('income').textContent=fmt(inc);el('expense').textContent=fmt(exp);
+let customerGiven=db.tx.filter(t=>t.kind===TYPES[9]).reduce((sum,t)=>sum+(+t.amount||0),0);
+let customerCollected=db.tx.filter(t=>t.kind===TYPES[10]).reduce((sum,t)=>sum+(+t.amount||0),0);
+let customerOutstanding=Math.max(0,customerGiven-customerCollected);
+let depositReceived=db.tx.filter(t=>[TYPES[15],TYPES[16]].includes(t.kind)).reduce((s,t)=>s+(+t.amount||0),0);
+let depositReturned=db.tx.filter(t=>[TYPES[17],TYPES[18]].includes(t.kind)).reduce((s,t)=>s+(+t.amount||0),0);
+let depositHeld=Math.max(0,depositReceived-depositReturned);
+el('depositSummary').innerHTML=[['কাস্টমারের কাছ থেকে মোট জমা',depositReceived],['কাস্টমারকে মোট ফেরত',depositReturned],['কাস্টমারের জমা এখনো আছে',depositHeld]].map((x,i)=>`<div class="customer-stat"><small>${x[0]}</small><strong class="${i===1?'green':i===2?'red':''}">${fmt(x[1])}</strong><div class="sub">${i===0?'ক্যাশ ও বিকাশে পাওয়া মোট টাকা':i===1?'ফেরত দেওয়া মোট টাকা':'এখনো ফেরত দেওয়া বাকি'}</div></div>`).join('');
+el('customerSummary').innerHTML=[['কাস্টমারকে মোট বাকি দিয়েছি',customerGiven,'লাল'],['কাস্টমারের কাছ থেকে মোট বাকি আদায়',customerCollected,'সবুজ'],['এখনো কাস্টমারের কাছে পাওনা',customerOutstanding,'নীল']].map((x,i)=>`<div class="customer-stat"><small>${x[0]}</small><strong class="${i===0?'red':i===1?'green':''}">${fmt(x[1])}</strong><div class="sub">${i===0?'মোট বাকি দেওয়ার হিসাব':i===1?'মোট আদায়ের হিসাব':'বর্তমানে আদায় বাকি আছে'}</div></div>`).join('');
+let rev=db.tx.map((t,i)=>({t,i})).reverse();el('recent').innerHTML=txRows(rev.slice(0,5));el('allTx').innerHTML=txRows(filterTx());el('totalCount').textContent=db.tx.length.toLocaleString('bn-BD')+'টি লেনদেন';renderCustomers();renderReports()}
+function filterTx(){let q=(el('txSearch')?.value||'').toLowerCase(),f=el('txFilter')?.value||'';return db.tx.map((t,i)=>({t,i})).filter(x=>(!f||x.t.kind===f)&&(!q||[x.t.kind,x.t.customer,x.t.reason].join(' ').toLowerCase().includes(q))).reverse()}
+function customerDue(name){return db.tx.filter(t=>t.customer.trim()===name.trim()).reduce((s,t)=>s+(t.kind===TYPES[9]?+t.amount:t.kind===TYPES[10]?-+t.amount:0),0)}
+function customerDepositDue(name,excludeIndex=-1){return db.tx.reduce((s,t,i)=>{if(i===excludeIndex||String(t.customer||'').trim()!==String(name||'').trim())return s;if([TYPES[15],TYPES[16]].includes(t.kind))return s+(+t.amount||0);if([TYPES[17],TYPES[18]].includes(t.kind))return s-(+t.amount||0);return s},0)}
+function quickCollect(name){showView('home');chooseType(TYPES[10]);el('customer').value=name;el('reason').value='আগের বাকি টাকা জমা';el('entry').scrollIntoView({behavior:'smooth'});el('amount').focus()}
+function editTx(i){let t=db.tx[i];el('editIndex').value=i;el('eKind').value=t.kind;el('eAmount').value=t.amount;el('eCustomer').value=t.customer;el('eReason').value=t.reason;el('eDate').value=t.date;el('editdlg').showModal()}
+function updateTxn(e){e.preventDefault();let i=+el('editIndex').value,kind=el('eKind').value,amount=+el('eAmount').value,customer=el('eCustomer').value.trim();if([TYPES[9],TYPES[10],TYPES[15],TYPES[16],TYPES[17],TYPES[18]].includes(kind)&&!customer){alert('কাস্টমারের হিসাবের জন্য নাম লিখুন');return}if(kind===TYPES[10]){let due=customerDue(customer);let old=db.tx[i];if(old.kind===TYPES[10]&&old.customer.trim()===customer)due+=+old.amount;if(amount>due){alert('এই কাস্টমারের বাকি এর চেয়ে কম।');return}}if([TYPES[17],TYPES[18]].includes(kind)){let held=customerDepositDue(customer,i);if(amount>held){alert('এই কাস্টমারের জমা আছে '+fmt(held)+'। এর বেশি ফেরত দেওয়া যাবে না।');return}}db.tx[i]={...db.tx[i],kind,amount,customer,reason:el('eReason').value,date:el('eDate').value};el('editdlg').close();persist()}
+function delTx(i){if(confirm('এই লেনদেন মুছে ফেলবেন?')){db.tx.splice(i,1);persist()}}
+function renderCustomers(){let q=(el('custSearch')?.value||'').toLowerCase(),m={};db.tx.forEach(t=>{let n=t.customer.trim();if(!n)return;if(!m[n])m[n]={count:0,due:0,deposit:0,last:t.date};m[n].count++;if(t.kind===TYPES[9])m[n].due+=+t.amount;if(t.kind===TYPES[10])m[n].due-=+t.amount;if([TYPES[15],TYPES[16]].includes(t.kind))m[n].deposit+=+t.amount;if([TYPES[17],TYPES[18]].includes(t.kind))m[n].deposit-=+t.amount;m[n].last=t.date});let rows=Object.entries(m).filter(([n])=>n.toLowerCase().includes(q));el('custList').innerHTML=rows.length?'<div class="tablewrap"><table><thead><tr><th>কাস্টমার</th><th>লেনদেন</th><th>এখনো বাকি</th><th>জমা আছে</th><th>শেষ তারিখ</th></tr></thead><tbody>'+rows.map(([n,v])=>`<tr><td><strong>${esc(n)}</strong></td><td>${v.count.toLocaleString('bn-BD')}</td><td><strong class="${v.due>0?'red':'green'}">${fmt(Math.max(0,v.due))}</strong><div class="muted">${v.due>0?'কাস্টমারের কাছে পাওনা':'বাকি নেই / অগ্রিম'}</div><button class="action" onclick="quickCollect('${esc(n).replace(/'/g, '&#39;')}')">＋ বাকি আদায়</button></td><td><strong class="${v.deposit>0?'red':'green'}">${fmt(Math.max(0,v.deposit))}</strong><div class="muted">কাস্টমারের জমা</div></td><td>${v.last}</td></tr>`).join('')+'</tbody></table></div>':'<div class="empty">কাস্টমারের নামে লেনদেন যোগ করলে এখানে তার বাকি দেখা যাবে</div>'}
+function renderReports(){let {inc,exp}=calc();el('reportCards').innerHTML=[['মোট আয়',inc,'green'],['মোট ব্যয়',exp,'red'],['নিট আয়',inc-exp,inc>=exp?'green':'red']].map(x=>`<div class="balance"><small>${x[0]}</small><strong class="${x[2]}">${fmt(x[1])}</strong></div>`).join('');let months=[];for(let j=3;j>=0;j--){let d=new Date();d.setMonth(d.getMonth()-j);let key=d.toISOString().slice(0,7);let label=d.toLocaleDateString('bn-BD',{month:'short'});let a=0,z=0;db.tx.filter(t=>(t.date||'').startsWith(key)).forEach(t=>{if(t.kind===TYPES[7])a+=+t.amount;if(t.kind===TYPES[8])z+=+t.amount});months.push({label,a,z})}let max=Math.max(1,...months.flatMap(x=>[x.a,x.z]));el('chart').innerHTML=months.map(m=>`<div class="barpair"><div class="bar" style="height:${Math.max(2,m.a/max*100)}%"></div><div class="bar exp" style="height:${Math.max(2,m.z/max*100)}%"></div><span class="barlabel">${m.label}</span></div>`).join('')}
+function openOpening(){let b=db.opening;[['oCash','cash'],['oBkash','bkash'],['oNagad','nagad'],['oCredit','credit'],['oBank','bank'],['oStock','stock']].forEach(([i,k])=>el(i).value=b[k]||0);el('opening').showModal()}
+function saveOpening(e){e.preventDefault();db.opening={cash:+el('oCash').value||0,bkash:+el('oBkash').value||0,nagad:+el('oNagad').value||0,credit:+el('oCredit').value||0,bank:+el('oBank').value||0,stock:+el('oStock').value||0};el('opening').close();persist()}
+function backup(){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='millat-enterprise-backup.json';a.click();URL.revokeObjectURL(a.href)}
+el('restoreFile').onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(!d.opening||!Array.isArray(d.tx))throw 0;db=d;persist();alert('ব্যাকআপ ফিরিয়ে আনা হয়েছে')}catch{alert('ফাইলটি সঠিক ব্যাকআপ নয়')}};r.readAsText(f)};
+function clearAll(){if(confirm('সব লেনদেন ও ব্যালেন্স মুছে ফেলবেন? আগে ব্যাকআপ নিন।')){db={opening:{cash:0,bkash:0,nagad:0,credit:0,bank:0,stock:0},tx:[]};persist()}}
+function showView(v){document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id===v));document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.view===v));if(v==='transactions')el('allTx').innerHTML=txRows(filterTx());if(v==='customers')renderCustomers();if(v==='reports')renderReports();window.scrollTo({top:0,behavior:'smooth'})}
+el('txSearch').oninput=()=>el('allTx').innerHTML=txRows(filterTx());el('txFilter').onchange=()=>el('allTx').innerHTML=txRows(filterTx());el('custSearch').oninput=renderCustomers;
+el('today').textContent='📅 আজ: '+new Date().toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'});
+chooseType(TYPES[0]);render();
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const firebaseConfig = {
+ apiKey:"AIzaSyAmEMXFYNHKaZwWM34JKuHInoKv1sFioY4",
+ authDomain:"millat-enterprise-413a9.firebaseapp.com",
+ projectId:"millat-enterprise-413a9",
+ storageBucket:"millat-enterprise-413a9.firebasestorage.app",
+ messagingSenderId:"188222467972",
+ appId:"1:188222467972:web:2c9ff51a5b7a941605b7d1",
+ measurementId:"G-S303DMCLKM"
+};
+const app=initializeApp(firebaseConfig), auth=getAuth(app), store=getFirestore(app);
+const status=document.getElementById('authStatus'), panel=document.getElementById('authPanel');
+let activeRef=null, stopWatch=null, saveTimer=null, applyingCloud=false, ready=false;
+const localKey='millat_web_v2';
+function showStatus(s){status.textContent=s}
+document.getElementById('loginBtn').addEventListener('click',async()=>{
+ const email=document.getElementById('loginEmail').value.trim(), password=document.getElementById('loginPassword').value;
+ if(!email||!password){showStatus('ইমেইল ও পাসওয়ার্ড লিখুন।');return}
+ showStatus('লগইন হচ্ছে…');
+ try{await signInWithEmailAndPassword(auth,email,password)}
+ catch(e){showStatus('লগইন হয়নি: '+(e.code||e.message));}
+});
+window.millatLogout=()=>signOut(auth);
+window.queueMillatCloudSave=()=>{
+ if(!ready||!activeRef||applyingCloud)return;
+ clearTimeout(saveTimer);
+ saveTimer=setTimeout(async()=>{
+  try{await setDoc(activeRef,{opening:db.opening,tx:db.tx,updatedAt:serverTimestamp()});showStatus('ক্লাউডে হিসাব সংরক্ষিত হয়েছে।')}
+  catch(e){showStatus('ক্লাউডে সংরক্ষণ হয়নি: '+(e.code||e.message));}
+ },700);
+};
+onAuthStateChanged(auth,async user=>{
+ if(stopWatch){stopWatch();stopWatch=null}
+ ready=false;activeRef=null;document.body.classList.remove('authed');
+ if(!user){panel.style.display='block';showStatus('অনুমোদিত ইমেইল দিয়ে লগইন করুন।');return}
+ panel.style.display='none';
+ activeRef=doc(store,'shops','millat-enterprise');
+ showStatus('ক্লাউডের হিসাব খোঁজা হচ্ছে…');
+ try{
+  const snap=await getDoc(activeRef);
+  if(!snap.exists()){
+   // First signed-in account seeds cloud from this browser's existing local data.
+   const local=JSON.parse(localStorage.getItem(localKey)||'null')||{opening:{cash:0,bkash:0,nagad:0,credit:0,bank:0,stock:0},tx:[]};
+   await setDoc(activeRef,{opening:local.opening||{},tx:Array.isArray(local.tx)?local.tx:[],createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
+  }
+  stopWatch=onSnapshot(activeRef,s=>{
+   if(!s.exists())return;
+   const remote=s.data();
+   if(!remote||!remote.opening||!Array.isArray(remote.tx)){showStatus('ক্লাউড ডেটার গঠন সঠিক নয়; সহায়তা প্রয়োজন।');return}
+   applyingCloud=true;db={opening:remote.opening,tx:remote.tx};
+   localStorage.setItem(localKey,JSON.stringify(db));render();applyingCloud=false;ready=true;document.body.classList.add('authed');
+   showStatus('লগইন হয়েছে। এই অ্যাকাউন্টের ক্লাউড হিসাব লোড হয়েছে।');
+  },e=>showStatus('ডেটা পড়া যায়নি: '+(e.code||e.message)));
+ }catch(e){showStatus('Firebase সংযোগ/নিরাপত্তা সমস্যা: '+(e.code||e.message));}
+});
+</script>
+
+</body></html>
